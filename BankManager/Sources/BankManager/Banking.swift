@@ -18,6 +18,15 @@ enum Banking: CaseIterable {
         }
     }
     
+    var requiredTime: Double {
+        switch self {
+        case .loan:
+            return 1.1
+        case .deposit:
+            return 0.7
+        }
+    }
+    
     static func random() -> Banking? {
         var generator = SystemRandomNumberGenerator()
         return Banking.allCases.randomElement(using: &generator)

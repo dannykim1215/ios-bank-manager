@@ -50,7 +50,7 @@ public struct BankManager {
             
             DispatchQueue.global().async(group: bankingGroup) {
                 print("\(customer.waitingNumber)번 고객 \(customer.banking.name)업무 시작")
-                Thread.sleep(forTimeInterval: 0.7)
+                Thread.sleep(forTimeInterval: customer.banking.requiredTime)
                 print("\(customer.waitingNumber)번 고객 \(customer.banking.name)업무 완료")
                 
                 switch customer.banking {
