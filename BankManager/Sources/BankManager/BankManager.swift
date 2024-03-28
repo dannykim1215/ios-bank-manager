@@ -49,9 +49,9 @@ public struct BankManager {
             }
             
             DispatchQueue.global().async(group: bankingGroup) {
-                print("\(customer.waitingNumber)번 고객 업무 시작")
+                print("\(customer.waitingNumber)번 고객 \(customer.banking.name)업무 시작")
                 Thread.sleep(forTimeInterval: 0.7)
-                print("\(customer.waitingNumber)번 고객 업무 완료")
+                print("\(customer.waitingNumber)번 고객 \(customer.banking.name)업무 완료")
                 
                 switch customer.banking {
                 case .loan:
