@@ -8,11 +8,11 @@
 import Foundation
 
 public struct BankManager {
-    private let numberOfBankClerk: Int
+    private let clerksCount: Int
     private let bankQueue = BankQueue<Customer>()
     
     public init(numberOfBankClerk: Int) {
-        self.numberOfBankClerk = numberOfBankClerk
+        self.clerksCount = numberOfBankClerk
     }
     
     private func enqueueTodaysVisitors() {
@@ -26,7 +26,7 @@ public struct BankManager {
         enqueueTodaysVisitors()
         let numberOfCustomer = bankQueue.count
         
-        let concurrentLimitingSemaphore = DispatchSemaphore(value: numberOfBankClerk)
+        let concurrentLimitingSemaphore = DispatchSemaphore(value: clerksCount)
         let bankingGroup = DispatchGroup()
         
         let bankingStartTime = DispatchTime.now()
