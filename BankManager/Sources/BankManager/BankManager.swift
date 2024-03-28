@@ -18,8 +18,12 @@ public struct BankManager {
     }
     
     private func enqueueTodaysVisitors() {
-        (1...Int.random(in: 10...30)).forEach {
-            let customer = Customer(waitingNumber: $0)
+        for waitingNumber in 1...Int.random(in: 10...30) {
+            guard let randomBanking = Banking.random() else {
+                return
+            }
+            
+            let customer = Customer(waitingNumber: waitingNumber, banking: randomBanking)
             bankQueue.enqueue(element: customer)
         }
     }
