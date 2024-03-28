@@ -39,15 +39,26 @@ public struct BankManager {
         
         let bankingStartTime = DispatchTime.now()
         while !bankQueue.isEmpty {
-            concurrentLimitingSemaphore.wait()
-            
             guard let customer = bankQueue.dequeue() else { return }
+            
+            switch customer.banking {
+            case .loan:
+                loanConcurrentLimitingSemaphore.wait()
+            case .deposit:
+                depositConcurrentLimitingSemaphore.wait()
+            }
             
             DispatchQueue.global().async(group: bankingGroup) {
                 print("\(customer.waitingNumber)번 고객 업무 시작")
                 Thread.sleep(forTimeInterval: 0.7)
                 print("\(customer.waitingNumber)번 고객 업무 완료")
-                concurrentLimitingSemaphore.signal()
+                
+                switch customer.banking {
+                case .loan:
+                    loanConcurrentLimitingSemaphore.signal()
+                case .deposit:
+                    depositConcurrentLimitingSemaphore.signal()
+                }
             }
         }
         
