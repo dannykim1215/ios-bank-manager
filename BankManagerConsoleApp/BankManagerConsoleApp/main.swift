@@ -7,7 +7,7 @@
 import Foundation
 import BankManager
 
-let bankManager = BankManager(numberOfBankClerk: 1)
+let bankManager = BankManager(loanClerksCount: 1, depositClerksCount: 2)
 
 while true {
     print("1 : 은행개점")
