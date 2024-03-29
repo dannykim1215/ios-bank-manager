@@ -54,7 +54,7 @@
 ##### 📌 문제 상황
 - 은행원이 한 명일 때는 문제가 되지 않으나 여러 명의 은행원이 업무를 처리할 경우 총 업무 시간을 수동으로 추적해 카운팅하는 것은 매우 번거로우며 비효율적입니다.
 
-```swift=
+```swift
 // BankManager.swift
 
 ...
@@ -75,7 +75,7 @@ while !bankQueue.isEmpty {
 ##### 🛠️ 해결 방법
 - `DispatchTime.now()` 메서드를 활용하여 업무시간 구하는 로직을 구현하였습니다. 단위가 나노 초이기 때문에 `1_000_000_000`으로 나눠줬습니다. 그리고 소수점 둘째 자리까지 표현하기 위해 extension를 이용하여 Double에 `rounded(toPlaces: Int)` 메서드를 확장했습니다. 결론적으로, 원하는 시간 단위 및 자리 수로 출력할 수 있었습니다.
 
-```swift=
+```swift
 // BankManager.swift
 
 ...
@@ -93,7 +93,7 @@ print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총
 ...
 
 ```
-```swift=
+```swift
 // Double+rounded.swift
 
 extension Double {
@@ -108,7 +108,7 @@ extension Double {
 ##### 📌 문제 상황
 - 이 모듈은 UI 앱에서도 사용되어야 하나, 단순 반복문만을 사용해 메인 스레드에서 업무를 처리할 경우 처리하는 동안 `Thread.sleep(forTimeInterval:)`로 현재 스레드(메인 스레드)를 멈추기 때문에 UI 처리가 불가능하게되고 쾌적하지 못한 사용자 경험을 유발할 수 있다고 판단했습니다.
 
-```swift=
+```swift
 // BankManager.swift
 
 ...
@@ -129,7 +129,7 @@ while !bankQueue.isEmpty {
 
 ##### 🛠️ 해결 방법
 - `DispatchQueue.global()`을 활용해 업무 처리가 메인 스레드가 아닌 다른 스레드에서 처리될 수 있게 했습니다. 또한 은행원의 수의 변화에 유연하게 대응할 수 있도록 DispatchSemaphore를 사용해 동시에 실행될 수 있는 Task의 수를 정해줄 수 있도록 했습니다.
-```swift=
+```swift
 // BankManager.swift
 
 ...
@@ -156,7 +156,7 @@ while !bankQueue.isEmpty {
 #### 3. ❗️마지막 고객의 업무를 시작하고 바로 업무를 마감하는 문제
 ##### 📌 문제 상황
 - `DispatchQueue.global().async`의 block을 global큐에 넣고 바로 다음 코드를 실행하기 때문에 마지막 고객의 업무를 시작은 하나, 완료하지 않고 은행 업무 자체를 마감해버리는 문제가 있었습니다.
-```swift=
+```swift
 /// BankManager.swift
 
 ...
@@ -182,7 +182,7 @@ while !bankQueue.isEmpty {
 
 ##### 🛠️ 해결 방법
 - `DispatchQueue.global().async`의 block을 `bankingGroup`으로 묶어 모든 고객의 업무가 처리될 때까지 대기해주도록 수정했습니다.
-```swift=
+```swift
 // BankManager.swift
 
 ...
@@ -213,7 +213,7 @@ bankingGroup.wait()
 ##### 📌 문제 상황
 - `BankManager` 모듈은 은행 업무 시작, 종료 행동을 print()문으로 실행하여 로그를 확인할 수 있었습니다. 하지만, 해당 모듈을 사용하는 모든 앱은 강제적으로 은행 업무에 대한 로그를 실행해야하는 문제가 있었기 때문에 트러블 슈팅이 필요하다고 판단했습니다.
 
-```swift=
+```swift
 // BankManager.swift
 
 public final class BankManager {
@@ -243,7 +243,7 @@ public final class BankManager {
 ##### 🛠️ 해결 방법
 - `BankManagerDelegate` 프로토콜 생성, `Delegate` 패턴을 활용하였습니다. 그리하여 `BankManager` 모듈의 은행 업무 시작, 종료 행동을 유연하게 만들 수 있었습니다.
 
-```swift=
+```swift
 // BankManager.swift
 
 public protocol BankManagerDelegate: AnyObject {
@@ -277,7 +277,7 @@ public final class BankManager {
 }
 ```
 
-```swift=
+```swift
 //ConsoleApp.swift
 
 final class ConsoleApp: BankManagerDelegate {
