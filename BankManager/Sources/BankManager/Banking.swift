@@ -5,11 +5,11 @@
 //  Created by Danny, Prism on 3/28/24.
 //
 
-enum Banking: CaseIterable {
+public enum Banking: CaseIterable {
     case loan
     case deposit
     
-    var name: String {
+    public var name: String {
         switch self {
         case .loan:
             return "대출"

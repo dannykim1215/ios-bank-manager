@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Customer {
-    let waitingNumber: Int
-    let banking: Banking
+public struct Customer {
+    public let waitingNumber: Int
+    public let banking: Banking
 }

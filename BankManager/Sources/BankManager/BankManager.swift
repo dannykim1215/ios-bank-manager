@@ -7,14 +7,23 @@
 
 import Foundation
 
-public struct BankManager {
+public protocol BankManagerDelegate: AnyObject {
+    func bankingStarted(customer: Customer)
+    func bankingEnded(customer: Customer)
+}
+
+public final class BankManager {
     private let loanClerksCount: Int
     private let depositClerksCount: Int
+    private var customersCount: Int
     private let bankQueue = BankQueue<Customer>()
+    
+    public weak var delegate: BankManagerDelegate?
     
     public init(loanClerksCount: Int, depositClerksCount: Int) {
         self.loanClerksCount = loanClerksCount
         self.depositClerksCount = depositClerksCount
+        self.customersCount = bankQueue.count
     }
     
     private func enqueueTodaysVisitors() {
@@ -26,18 +35,18 @@ public struct BankManager {
             let customer = Customer(waitingNumber: waitingNumber, banking: randomBanking)
             bankQueue.enqueue(element: customer)
         }
+        
+        customersCount = bankQueue.count
     }
     
     public func commenceBanking() {
         enqueueTodaysVisitors()
-        let customersCount = bankQueue.count
         
         let loanConcurrentLimitingSemaphore = DispatchSemaphore(value: loanClerksCount)
         let depositConcurrentLimitingSemaphore = DispatchSemaphore(value: depositClerksCount)
         
         let bankingGroup = DispatchGroup()
         
-        let bankingStartTime = DispatchTime.now()
         while !bankQueue.isEmpty {
             guard let customer = bankQueue.dequeue() else { return }
             
@@ -49,9 +58,9 @@ public struct BankManager {
             }
             
             DispatchQueue.global().async(group: bankingGroup) {
-                print("\(customer.waitingNumber)번 고객 \(customer.banking.name)업무 시작")
+                self.delegate?.bankingStarted(customer: customer)
                 Thread.sleep(forTimeInterval: customer.banking.requiredTime)
-                print("\(customer.waitingNumber)번 고객 \(customer.banking.name)업무 완료")
+                self.delegate?.bankingEnded(customer: customer)
                 
                 switch customer.banking {
                 case .loan:
@@ -63,9 +72,9 @@ public struct BankManager {
         }
         
         bankingGroup.wait()
-        
-        let bankingEndTime = DispatchTime.now()
-        let bankingElapsedTime = Double(bankingEndTime.uptimeNanoseconds - bankingStartTime.uptimeNanoseconds) / 1_000_000_000
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customersCount)명이며, 총 업무시간은 \(bankingElapsedTime.rounded(toPlaces: 2))초입니다.")
+    }
+    
+    public func printClosingMessage(elapsed: Double) {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customersCount)명이며, 총 업무시간은 \(elapsed.rounded(toPlaces: 2))초입니다.")
     }
 }
