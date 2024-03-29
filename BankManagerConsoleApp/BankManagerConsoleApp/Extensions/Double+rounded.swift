@@ -1,6 +1,6 @@
 //
 //  Double+rounded.swift
-//  
+//
 //
 //  Created by Danny, Prism on 3/22/24.
 //

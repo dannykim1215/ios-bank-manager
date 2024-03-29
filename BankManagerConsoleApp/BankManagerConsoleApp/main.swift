@@ -32,14 +32,7 @@ final class ConsoleApp: BankManagerDelegate {
             
             switch menu {
             case .commence:
-                let bankingStartTime = DispatchTime.now()
-                
                 bankManager.commenceBanking()
-                
-                let bankingEndTime = DispatchTime.now()
-                let bankingElapsedTime = Double(bankingEndTime.uptimeNanoseconds - bankingStartTime.uptimeNanoseconds) / 1_000_000_000
-                
-                bankManager.printClosingMessage(elapsed: bankingElapsedTime)
             case .exit:
                 exit(0)
             }
@@ -52,6 +45,10 @@ final class ConsoleApp: BankManagerDelegate {
     
     func bankingEnded(customer: Customer) {
         print("\(customer.waitingNumber)번 고객 \(customer.banking.name)업무 종료")
+    }
+    
+    func bankClosed(customersCount: Int, elapsedTime: Double) {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customersCount)명이며, 총 업무시간은 \(elapsedTime.rounded(toPlaces: 2))초입니다.")
     }
 }
 

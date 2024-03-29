@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		63222B622A691A3500F197ED /* BankManager in Frameworks */ = {isa = PBXBuildFile; productRef = 63222B612A691A3500F197ED /* BankManager */; };
 		C404EE852BAD599000ACC8E0 /* BankMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C404EE842BAD599000ACC8E0 /* BankMenu.swift */; };
+		C4058F612BB69F1D00B02D2F /* Double+rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4058F602BB69F1D00B02D2F /* Double+rounded.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 		63222B5F2A6919F700F197ED /* BankManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = BankManager; path = ../BankManager; sourceTree = "<group>"; };
 		C404EE832BAD4A1700ACC8E0 /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C404EE842BAD599000ACC8E0 /* BankMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankMenu.swift; sourceTree = "<group>"; };
+		C4058F602BB69F1D00B02D2F /* Double+rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+rounded.swift"; sourceTree = "<group>"; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -58,6 +60,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C4058F5F2BB69F0F00B02D2F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C4058F602BB69F1D00B02D2F /* Double+rounded.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +81,7 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
+				C4058F5F2BB69F0F00B02D2F /* Extensions */,
 				C404EE842BAD599000ACC8E0 /* BankMenu.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 			);
@@ -139,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C404EE852BAD599000ACC8E0 /* BankMenu.swift in Sources */,
+				C4058F612BB69F1D00B02D2F /* Double+rounded.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

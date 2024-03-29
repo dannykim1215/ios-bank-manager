@@ -10,6 +10,7 @@ import Foundation
 public protocol BankManagerDelegate: AnyObject {
     func bankingStarted(customer: Customer)
     func bankingEnded(customer: Customer)
+    func bankClosed(customersCount: Int, elapsedTime: Double)
 }
 
 public final class BankManager {
@@ -47,6 +48,8 @@ public final class BankManager {
         
         let bankingGroup = DispatchGroup()
         
+        let bankingStartTime = DispatchTime.now()
+        
         while !bankQueue.isEmpty {
             guard let customer = bankQueue.dequeue() else { return }
             
@@ -72,9 +75,10 @@ public final class BankManager {
         }
         
         bankingGroup.wait()
-    }
-    
-    public func printClosingMessage(elapsed: Double) {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customersCount)명이며, 총 업무시간은 \(elapsed.rounded(toPlaces: 2))초입니다.")
+        
+        let bankingEndTime = DispatchTime.now()
+        let bankingElapsedTime = Double(bankingEndTime.uptimeNanoseconds - bankingStartTime.uptimeNanoseconds) / 1_000_000_000
+        
+        self.delegate?.bankClosed(customersCount: customersCount, elapsedTime: bankingElapsedTime)
     }
 }
