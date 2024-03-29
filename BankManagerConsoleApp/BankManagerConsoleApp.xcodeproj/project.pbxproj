@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E9AF63E2BB6A2500070DCCA /* ConsoleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9AF63D2BB6A2500070DCCA /* ConsoleApp.swift */; };
 		63222B622A691A3500F197ED /* BankManager in Frameworks */ = {isa = PBXBuildFile; productRef = 63222B612A691A3500F197ED /* BankManager */; };
 		C404EE852BAD599000ACC8E0 /* BankMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C404EE842BAD599000ACC8E0 /* BankMenu.swift */; };
 		C4058F612BB69F1D00B02D2F /* Double+rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4058F602BB69F1D00B02D2F /* Double+rounded.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2E9AF63D2BB6A2500070DCCA /* ConsoleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleApp.swift; sourceTree = "<group>"; };
 		63222B5F2A6919F700F197ED /* BankManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = BankManager; path = ../BankManager; sourceTree = "<group>"; };
 		C404EE832BAD4A1700ACC8E0 /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C404EE842BAD599000ACC8E0 /* BankMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankMenu.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				C4058F5F2BB69F0F00B02D2F /* Extensions */,
 				C404EE842BAD599000ACC8E0 /* BankMenu.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
+				2E9AF63D2BB6A2500070DCCA /* ConsoleApp.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -152,6 +155,7 @@
 				C404EE852BAD599000ACC8E0 /* BankMenu.swift in Sources */,
 				C4058F612BB69F1D00B02D2F /* Double+rounded.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				2E9AF63E2BB6A2500070DCCA /* ConsoleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
