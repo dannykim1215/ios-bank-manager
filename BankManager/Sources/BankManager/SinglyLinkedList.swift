@@ -62,7 +62,7 @@ final class SinglyLinkedList<T> {
         return element
     }
     
-    func clear() {
+    func removeAll() {
         head = nil
         tail = nil
         count = 0
